@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+<style>
+    body {
+        background-image: url('/backgroundsImages/libraryLogin.jpg'); /* путь к файлу в static */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+    }
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+</style>
+<body>
+
+<form method="post" action="/process_login">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+    <label for="username">Введите имя пользователя</label>
+    <input type="text" name="username" id="username"/>
+    <br/>
+    <label for="password">Введите пароль</label>
+    <input type="password" name="password" id="password"/>
+    <br/>
+    <input type="submit" value="Login"/>
+
+    <div th:if="${param.error}" style="color: red">
+        Неправильные имя или пароль
+    </div>
+
+
+
+
+
+</form>
+
+</body>
+</html>
