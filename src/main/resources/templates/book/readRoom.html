@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Читальнй зал</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            background-image: url('/backgroundsImages/readRoom.jpg'); /* путь к файлу в static */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+        }
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+
+<!-- перебираем Model attribute "books" -->
+<ul class="space-y-2">
+    <li th:each="b : ${books}">
+        <a th:href="@{|/books/${b.id}|}"
+           th:text="${b.title + ' (' + b.publishYear + ')'}"
+           class="text-indigo-600 hover:underline"></a>
+    </li>
+</ul>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Домашняя страница</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         body {
             background-image: url('/backgroundsImages/libraryHomePage.jpg'); /* путь к файлу в static */
@@ -19,8 +19,18 @@
     </style>
 </head>
 <body>
-<div class="overlay flex items-center justify-center h-full">
+
     <h1 class="text-white text-4xl font-bold drop-shadow-lg">Добро пожаловать</h1>
-</div>
+
+<button th:onclick="|location.href='@{/goReadRoom}'|"
+        class="mt-8 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+    Перейти в читальню
+</button>
+
+    <button th:onclick="|location.href='@{/addBook}'|"
+            class="mt-8 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">
+        Добавить книгу
+    </button>
+
 </body>
 </html>

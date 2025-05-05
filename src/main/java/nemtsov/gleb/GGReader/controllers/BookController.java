@@ -5,11 +5,12 @@ import nemtsov.gleb.GGReader.models.Book;
 import nemtsov.gleb.GGReader.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class BookController {
@@ -27,14 +28,28 @@ public class BookController {
 
     @PostMapping("/addBook")
     public String addBook(@ModelAttribute("book") @Valid Book book,
-                          BindingResult bindingResult) {
+                          BindingResult bindingResult,
+                          @RequestParam("file") MultipartFile file) throws IOException {
 
         if (bindingResult.hasErrors())
             return "book/addBook";
 
-
+        book.setContent(file.getBytes());
         bookService.addBook(book);
 
         return "redirect:/homePage";
     }
+
+    @GetMapping("/goReadRoom")
+    public String readRoom(Model model) {
+        model.addAttribute("books", bookService.findAll());
+        return "book/readRoom";
+    }
+
+    @GetMapping("/goReadRoom")
+    public String read(@RequestParam int id, Model model) {
+        model.addAttribute("bookId", id);
+        return "book/show";
+    }
+
 }
